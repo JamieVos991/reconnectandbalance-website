@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offerte Reconnect & Balance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Kleuren in de huisstijl van Reconnect & Balance (van donker naar licht) */
+  :root{
+    --c0:#3a362d;   /* donkerst */
+    --c1:#4f4b3f;
+    --c2:#67624f;
+    --c3:#7d7764;
+    --c4:#8f8a78;   /* taupe van het merk */
+    --c5:#958e77;
+    --c6:#a1997f;
+    --gold:#c6a052; /* goud uit het logo */
+    --line:rgba(30,28,22,.55);
+    --text:#fff;
+  }
+  @page{size:A4;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#e9e6df;font-family:"Inter Tight",Helvetica,Arial,sans-serif;color:var(--text);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pages{display:flex;flex-wrap:wrap;gap:32px;justify-content:center;padding:32px 16px}
+  .page{position:relative;width:min(468px,100%);aspect-ratio:210/297;overflow:hidden;container-type:inline-size;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+  .b,.t{position:absolute}
+  .t{font-weight:600;line-height:1.28;letter-spacing:-.005em}
+  .hl{position:absolute;left:0;right:0;height:1px;background:var(--line)}
+  .vl{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+  .rot{transform-origin:left top;transform:rotate(-90deg);white-space:nowrap}
+  /* Exportweergaven voor PNG: #strip = alle pagina's naast elkaar, #p1..#p4 = één pagina */
+  .strip body,.single body{background:#fff}
+  .strip .pages,.single .pages{flex-wrap:nowrap;justify-content:flex-start;gap:40px;padding:0}
+  .strip .page,.single .page{width:468px;flex:none;box-shadow:none}
+  .single .page:not(.show){display:none}
+  @media print{
+    body{background:none}
+    .pages{display:block;padding:0}
+    .page{width:210mm;height:297mm;aspect-ratio:auto;box-shadow:none;page-break-after:always;break-after:page}
+  }
+</style>
+</head>
+<body>
+<div class="pages" id="pages"></div>
+
+<script>
+// Ontwerp-raster op een canvas van 468 x 662 (A4-verhouding); alles wordt omgerekend naar procenten
+const W = 468, H = 662;
+const ROWS = [0, 43, 166, 331, 496, 662];          // horizontale grenzen
+const RIGHT = 414;                                   // smalle kolom rechts
+
+// Vaste blokindeling, gelijk op elke pagina
+const BLOCKS = [
+  [0, 0, 234, 166, 'c3'], [234, 0, 180, 166, 'c4'], [RIGHT, 0, W - RIGHT, 166, 'c4'],
+  [0, 166, 142, 165, 'c0'], [142, 166, 201, 165, 'c1'], [343, 166, 71, 165, 'gold'], [RIGHT, 166, W - RIGHT, 165, 'gold'],
+  [0, 331, 234, 165, 'c5'], [234, 331, 180, 165, 'c2'], [RIGHT, 331, W - RIGHT, 165, 'c2'],
+  [0, 496, 190, 166, 'c1'], [190, 496, 224, 166, 'c6'], [RIGHT, 496, W - RIGHT, 166, 'c6'],
+];
+
+const TITLE = 'Holistische praktijk uit Den Haag';
+const DATE = '23-10-2026';
+
+// Tekstblokken: [x, y, breedte, lettergrootte, tekst, extra stijl]
+const PAGES = [
+  {
+    texts: [[255, 64, 150, 19, TITLE]],
+    big: true,
+    side: [[DATE, 640]],
+  },
+  {
+    texts: [
+      [255, 64, 150, 19, TITLE],
+      [156, 186, 180, 11.3, 'Nu draait de website op WordPress met een zwaar thema en een paginabouwer. Het ontwerp oogt gedateerd, werkt matig op de telefoon en informatie staat verspreid. Met de nieuwe website staan behandelingen, producten en het verhaal van Linda overzichtelijk op één plek.'],
+      [18, 360, 200, 14, 'De website wordt volledig vanuit scratch gebouwd en is niet afhankelijk van WordPress of plugins. Dit zorgt voor een snelle, veilige site en volledige controle.'],
+      [220, 524, 182, 13, 'Er wordt ontworpen met focus op rust, sfeer en toegankelijkheid. De warme kleuren en het gouden logo komen terug, zodat de site past bij de praktijk, ook op een telefoon.'],
+    ],
+    side: [[DATE, 640]],
+  },
+  {
+    texts: [
+      [255, 64, 150, 19, TITLE],
+      [152, 184, 186, 11.5, 'Alle huidige pagina’s in een nieuw ontwerp, van behandelingen tot shop en contact.<span style="display:block;height:.6em"></span>Behandelingen en tarieven overzichtelijk per pagina.<span style="display:block;height:.6em"></span>Shop met alle 18 producten, gekoppeld aan de bestaande webwinkel.'],
+      [20, 376, 200, 14, 'Een rustige, warme uitstraling die past bij de praktijk en het logo.'],
+      [250, 360, 156, 14, 'De website werkt op elk apparaat, van computer tot de telefoon van een bezoeker.'],
+      [13, 514, 168, 10.3, 'Bezoekers vinden in een paar klikken de juiste behandeling of het juiste product. Contact opnemen kan direct via e-mail, WhatsApp of telefoon. Bestellen en afrekenen blijft via de vertrouwde webwinkel.'],
+      [226, 530, 176, 14, 'Snel en veilig: geen zware thema’s of plugins, dus minder onderhoud en een korte laadtijd.'],
+    ],
+    scope: true,
+    side: [[DATE, 640]],
+  },
+  {
+    texts: [
+      [255, 64, 150, 19, TITLE],
+      [18, 206, 310, 14, 'Wanneer is het klaar? Ik werk in duidelijke stappen zodat je precies weet waar we staan. Het ontwerp en alle pagina’s staan klaar, daarna zetten we de website online. De doorlooptijd is 2&nbsp;weken.'],
+      [24, 346, 204, 12.5, 'De website wordt opgeleverd tegen een uurtarief van €&nbsp;48. Naar verwachting gaat het om ongeveer 15&nbsp;uur, circa €&nbsp;720, exclusief 15% korting. Vanaf dat moment geldt een maandelijkse vergoeding van €&nbsp;50. Dit is inclusief hosting en onderhoud. Prijzen zijn exclusief BTW.'],
+      [235, 564, 170, 13.5, 'hallo@lychees.studio<br>www.lychees.studio'],
+    ],
+    side: [['Schagen', 280, 12], ['+31 6 13 896402', 470, 12], [DATE, 640]],
+  },
+];
+
+const pct = (v, total) => (v / total * 100) + '%';
+const cq = px => (px / W * 100) + 'cqw';
+
+const root = document.getElementById('pages');
+for (const p of PAGES) {
+  const page = document.createElement('section');
+  page.className = 'page';
+  let html = BLOCKS.map(([x, y, w, h, c]) =>
+    `<div class="b" style="left:${pct(x, W)};top:${pct(y, H)};width:${pct(w, W)};height:${pct(h, H)};background:var(--${c})"></div>`).join('');
+  html += `<div class="hl" style="top:${pct(ROWS[1], H)}"></div><div class="vl" style="left:${pct(RIGHT, W)}"></div>`;
+  for (const [x, y, w, fs, txt] of p.texts) {
+    html += `<div class="t" style="left:${pct(x, W)};top:${pct(y, H)};width:${pct(w, W)};font-size:${cq(fs)}">${txt}</div>`;
+  }
+  // Verticale teksten in de smalle kolom rechts (onderkant = startpunt)
+  for (const [txt, bottom, fs = 19] of p.side) {
+    html += `<div class="t rot" style="left:${pct(RIGHT + (W - RIGHT) / 2 - fs * .62, W)};top:${pct(bottom, H)};font-size:${cq(fs)};font-weight:${fs > 15 ? 700 : 600}">${txt}</div>`;
+  }
+  if (p.big) {
+    html += `<div class="t rot" style="left:${pct(226, W)};top:${pct(640, H)};font-size:${cq(76)};font-weight:800;line-height:.92;letter-spacing:-.02em">Reconnect<br>&amp; Balance</div>`;
+  }
+  if (p.scope) {
+    html += `<div class="t rot" style="left:${pct(52, W)};top:${pct(306, H)};font-size:${cq(34)};font-weight:800;letter-spacing:-.01em">Scope</div>`;
+  }
+  page.innerHTML = html;
+  root.append(page);
+}
+
+const view = location.hash.slice(1);
+if (view === 'strip') document.documentElement.classList.add('strip');
+if (/^p[1-4]$/.test(view)) {
+  document.documentElement.classList.add('single');
+  root.children[view[1] - 1].classList.add('show');
+}
+</script>
+</body>
+</html>
