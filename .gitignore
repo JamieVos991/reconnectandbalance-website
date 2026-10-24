@@ -1,0 +1,10 @@
+# Instellingen van Claude Code
+.claude/
+
+# Geïnstalleerde pakketten (npm install haalt ze terug)
+node_modules/
+
+# Kopie van de oude WordPress-site, alleen als referentie
+# (bevat o.a. een Google Maps API-sleutel)
+_bron/
+content/
