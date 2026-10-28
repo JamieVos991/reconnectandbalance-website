@@ -34,9 +34,7 @@
   .sg-row .prose h3{margin:0}
   .sg-full{grid-column:1/-1}
   .sg-two{max-width:640px;grid-template-columns:repeat(2,1fr)}
-  .sg-products{max-width:760px}
   .sg-narrow{max-width:640px}
-  .sg-badge{position:relative;height:40px}.sg-badge .badge{top:0;left:0}
   @media (max-width:700px){.sg-row,.sg-grid-2{grid-template-columns:1fr;gap:10px}}
 </style>
 
@@ -119,11 +117,10 @@
     <span class="eyebrow">[ 04 ]</span>
     <h2>Knoppen &amp; links</h2>
     <div class="sg-row"><span class="sg-label">.btn.btn-gold</span><div><a href="#" class="btn btn-gold">Plan een afspraak</a></div></div>
-    <div class="sg-row"><span class="sg-label">.btn.btn-ghost</span><div><a href="#" class="btn btn-ghost">Bekijk de shop</a></div></div>
+    <div class="sg-row"><span class="sg-label">.btn.btn-ghost</span><div><a href="#" class="btn btn-ghost">Bekijk het aanbod</a></div></div>
     <div class="sg-row"><span class="sg-label">.btn.btn-line (op donker)</span><div class="dark sg-dark-box"><a href="#" class="btn btn-line">Afspraak maken</a></div></div>
     <div class="sg-row"><span class="sg-label">.link</span><div><a href="#" class="link">Ontdek de behandelingen</a></div></div>
     <div class="sg-row"><span class="sg-label">.link (op donker)</span><div class="olive sg-dark-box"><a href="#" class="link">Lees meer over Linda</a></div></div>
-    <div class="sg-row"><span class="sg-label">a .more</span><div><a href="#"><span class="more">Bekijk product</span></a></div></div>
   </div>
 </section>
 
@@ -138,15 +135,15 @@
       </div>
       <div>
         <span class="sg-label">.callout</span>
-        <div class="callout"><p>Het verschil tussen Arganolie en Cactusolie is het percentage vitamine E.</p></div>
+        <div class="callout"><p>Een QM hypnose sessie duurt tussen de 4 en 6 uur.</p></div>
       </div>
       <div>
         <span class="sg-label">.callout.center + .big</span>
-        <div class="callout center"><p class="big">Kosten hypnose sessie € 375,00</p><p>(incl. nagesprek 30 min 2 weken na de sessie)</p></div>
+        <div class="callout center"><p class="big">Inclusief nagesprek</p><p>30 min, 2 weken na de sessie</p></div>
       </div>
       <div class="prose">
         <span class="sg-label">.prose ul.dots</span>
-        <ul class="dots"><li>vermindering van rimpels</li><li>maakt je haar sterk en gezond</li><li>verzorgt handen en nagels</li></ul>
+        <ul class="dots"><li>een andere chemische samenstelling</li><li>een ander beoogd gebruik en effect</li><li>een verschil in veilig gebruik</li></ul>
       </div>
       <div class="sg-full">
         <span class="sg-label">ul.checklist</span>
@@ -160,18 +157,15 @@
   <div class="wrap">
     <span class="eyebrow">[ 06 ]</span>
     <h2>Kaarten</h2>
-    <span class="sg-label">.offer-card</span>
-    <div class="offer-cards sg-two">
-      <a href="#" class="offer-card"><div class="img"><img src="https://reconnectandbalance.com/wp-content/uploads/2024/07/kosmos.jpeg" alt=""></div><h3>QM Hypnose</h3><p>Quantum Manifestatie Hypnose, ervaren wie je ten diepste bent.</p></a>
-      <a href="#" class="offer-card"><div class="img"></div><h3>Lege afbeelding</h3><p>Zo ziet een kaart eruit zonder foto: het streepjespatroon.</p></a>
+    <span class="sg-label">.offer-list / .offer-row</span>
+    <div class="offer-list">
+      <a href="#" class="offer-row"><h3>QM Hypnose</h3><p>Quantum Manifestatie Hypnose, ervaren wie je ten diepste bent.</p><span class="arrow" aria-hidden="true"></span></a>
     </div>
     <span class="sg-label" data-gap>.price-card / .price-card.featured</span>
     <div class="price-grid sg-two">
-      <div class="price-card"><h3>Vervolg Consult</h3><span class="dur">1 uur</span><div class="amount">€105</div><ul><li>Bodyscan meting</li><li>Analyse</li><li>Behandeling</li></ul></div>
-      <div class="price-card featured"><h3>Pakket</h3><span class="dur">3 consulten</span><div class="amount">€299</div><ul><li>3 x Bodyscan meting</li><li>3 x Analyse</li><li>3 x Behandeling</li></ul></div>
+      <div class="price-card"><h3>Vervolg Consult</h3><span class="dur">1 uur</span><ul><li>Bodyscan meting</li><li>Analyse</li><li>Behandeling</li></ul></div>
+      <div class="price-card featured"><h3>Pakket</h3><span class="dur">3 consulten</span><ul><li>3 x Bodyscan meting</li><li>3 x Analyse</li><li>3 x Behandeling</li></ul></div>
     </div>
-    <span class="sg-label" data-gap>.product (via &lt;!-- products:… --&gt;)</span>
-    <div class="sg-products"><!-- products:cactus --></div>
   </div>
 </section>
 
@@ -194,16 +188,9 @@
   <div class="wrap">
     <span class="eyebrow">[ 08 ]</span>
     <h2>Overig</h2>
-    <span class="sg-label">.terms details</span>
-    <div class="terms sg-narrow">
-      <details open><summary>Levertijd</summary><div><p>De totale levertijd zal daarmee in de regel uitkomen op 2 tot 3 werkdagen.</p></div></details>
-      <details><summary>Retour</summary><div><p>Artikelen die niet aan de wens voldoen kunnen binnen 14 dagen worden geretourneerd.</p></div></details>
-    </div>
-    <span class="sg-label" data-gap>.contact-list</span>
+    <span class="sg-label">.contact-list</span>
     <ul class="contact-list">
       <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><strong>Email</strong><a href="mailto:info@reconnectandbalance.com">info@reconnectandbalance.com</a></div></li>
     </ul>
-    <span class="sg-label" data-gap>.badge</span>
-    <div class="sg-badge"><span class="badge">Aanbieding!</span></div>
   </div>
 </section>
