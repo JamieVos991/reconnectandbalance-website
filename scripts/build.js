@@ -10,63 +10,16 @@ const OUT = path.join(ROOT, 'site');
 const IMG_OUT = path.join(OUT, 'img');
 const OLD_UPLOADS = /https:\/\/reconnectandbalance\.com\/wp-content\/uploads\/[^"')\s]+/g;
 
-const SHOP = 'https://reconnectandbalance.com/winkel';
-const products = {
-  argan: [
-    { name: 'Arganolie', url: `${SHOP}/arganolieen/arganolie/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/A_2_VB-300x300.jpeg', price: '€ 29,95' },
-    { name: '2x Arganolie', url: `${SHOP}/arganolieen/2x-arganolie/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/A_1.2_VB-300x300.jpg', price: '€ 54,95', was: '€ 59,90' },
-    { name: '3x Arganolie', url: `${SHOP}/arganolieen/3x-arganolie/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/A_1.3_VB-scaled-1-300x300.jpg', price: '€ 79,95', was: '€ 89,85' },
-    { name: 'Arganolie Culinair', url: `${SHOP}/arganolieen/arganolie-culinair/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/C_argan_bewerkt2-scaled-1-300x300.jpg', price: '€ 24,95' },
-  ],
-  cactus: [
-    { name: 'Cactusolie', url: `${SHOP}/cactusolieen/cactusolie/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/C_2_VB-300x300.jpeg', price: '€ 49,95' },
-    { name: 'Cactuspoeder', url: `${SHOP}/nopal-poeder/cactuspoeder/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/CP_VB_2-300x300.jpg', price: '€ 22,95' },
-  ],
-  tincturen: [
-    { name: 'Lion’s Mane Tinctuur', url: `${SHOP}/tincturen/lions-mane-tinctuur/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/terracottatcm-tictuur-lions_mane.png-300x300.webp', price: '€ 24,95' },
-    { name: 'Reishi Tinctuur', url: `${SHOP}/tincturen/reishi-tinctuur/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/terracottatcm-tictuur-reishi.png-300x300.webp', price: '€ 24,95' },
-    { name: 'Times Five Tinctuur', url: `${SHOP}/tincturen/times-five-tinctuur/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/terracottatcm-tictuur-times-five.png-300x300.webp', price: '€ 24,95' },
-    { name: 'Cordyceps Tinctuur', url: `${SHOP}/tincturen/cordyceps-tinctuur/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/terracottatcm-tictuur-cordyceps.png-300x300.webp', price: '€ 24,95' },
-    { name: 'Chaga Tinctuur', url: `${SHOP}/tincturen/chaga-tinctuur/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/terracottatcm-tictuur-chaga.png-300x300.webp', price: '€ 24,95' },
-  ],
-  supplementen: [
-    { name: 'Hormone Harmony', url: `${SHOP}/voedingssupplement/hormone-harmony/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/Hormone-Harmony-bottle-mockup.png-300x300.webp', price: '€ 49,95' },
-    { name: 'Relax', url: `${SHOP}/voedingssupplement/relax/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/Relax-bottle-mockup.png-300x300.webp', price: '€ 49,95' },
-    { name: 'Shou Xing', url: `${SHOP}/voedingssupplement/shou-xing/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/Shou-Xing-bottle-mockup.png-300x300.webp', price: '€ 55,00 – € 99,00' },
-    { name: 'Amitabha', url: `${SHOP}/voedingssupplement/amitabha/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/Amitabha-bottle-mockup.png-300x300.webp', price: '€ 55,00 – € 99,00' },
-    { name: 'Bodhi Zhi', url: `${SHOP}/voedingssupplement/bodhi-zhi/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/BodhiZhi-bottle-mockup.png-300x300.webp', price: '€ 55,00 – € 99,00' },
-    { name: 'Rockstar', url: `${SHOP}/voedingssupplement/rockstar/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/Rockstar-bottle-mockup.png-300x300.webp', price: '€ 55,00 – € 99,00' },
-    { name: 'Xi’An', url: `${SHOP}/voedingssupplement/xian/`, img: 'https://reconnectandbalance.com/wp-content/uploads/2024/07/Xian-bottle-mockup.png-300x300.webp', price: '€ 55,00 – € 99,00' },
-  ],
-};
-products.nopal = [products.cactus[1]];
-
-const productGrid = list => `<div class="product-grid">${list.map(p => `
-  <a class="product" href="${p.url}">
-    ${p.was ? '<span class="badge">Aanbieding!</span>' : ''}
-    <div class="product-img"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
-    <div class="product-info">
-      <h3>${p.name}</h3>
-      <p class="price">${p.was ? `<del>${p.was}</del> ` : ''}${p.price}</p>
-      <span class="more">Bekijk product</span>
-    </div>
-  </a>`).join('')}
-</div>`;
-
 const nav = [
   { label: 'Behandelingen', children: [
     { href: 'holistische-bodyscan.html', label: 'Holistische Bodyscan' },
     { href: 'mycotherapie.html', label: 'Mycotherapie' },
     { href: 'qm-hypnose.html', label: 'QM Hypnose' },
+    { href: 'biofotonentherapie.html', label: 'Biofotonentherapie' },
   ] },
+  { href: 'tarieven.html', label: 'Tarieven' },
   { href: 'linda-vos.html', label: 'Linda' },
-  { label: 'Huidverzorging', children: [
-    { href: 'arganolie.html', label: 'Arganolie' },
-    { href: 'cactusolie.html', label: 'Cactusolie' },
-    { href: 'nopal-cactuspoeder.html', label: 'Nopal cactuspoeder' },
-  ] },
   { href: 'opleidingen.html', label: 'Opleidingen' },
-  { href: 'winkel.html', label: 'Shop' },
 ];
 
 function renderNav(current) {
@@ -78,7 +31,7 @@ function renderNav(current) {
         <div class="dropdown-menu">${n.children.map(item).join('')}</div>
       </div>`;
   };
-  return nav.map(item).join('\n      ') + `\n      <a href="contact.html" class="btn btn-line">Afspraak maken</a>`;
+  return nav.map(item).join('\n      ') + `\n      <a href="contact.html" class="btn btn-line menu-cta">Afspraak maken</a>`;
 }
 
 const template = (file, title, description, body) => `<!doctype html>
@@ -102,7 +55,7 @@ const template = (file, title, description, body) => `<!doctype html>
     <nav class="menu" id="menu" aria-label="Hoofdmenu">
       ${renderNav(file)}
     </nav>
-    <a href="https://reconnectandbalance.com/winkelwagen/" class="cart" aria-label="Winkelwagen"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h11.2L21 8H6.2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg></a>
+    <a href="contact.html" class="btn btn-line nav-cta">Afspraak maken</a>
     <button class="burger" aria-label="Menu openen" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -111,14 +64,6 @@ const template = (file, title, description, body) => `<!doctype html>
 ${body}
 </main>
 
-${file === 'index.html' ? '' : `<section class="usp">
-  <div class="wrap usp-row">
-    <div class="usp-item"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><div><h4>Verzenden</h4><p>Verzending door heel Europa</p></div></div>
-    <div class="usp-item"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><div><h4>Garantie</h4><p>Niet goed, geld terug garantie</p></div></div>
-    <div class="usp-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div><h4>Contact</h4><p>Persoonlijk contact is altijd mogelijk</p></div></div>
-  </div>
-</section>`}
-
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-about">
@@ -126,39 +71,36 @@ ${file === 'index.html' ? '' : `<section class="usp">
       <p class="footer-tag">Verbinden met jezelf, je hart, je essentie.<br>Holistische praktijk in Den Haag.</p>
     </div>
     <nav class="footer-col" aria-label="Menu">
-      <h3 class="footer-heading">Menu</h3>
+      <h2 class="footer-heading">Menu</h2>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="linda-vos.html">Linda Vos</a></li>
+        <li><a href="tarieven.html">Tarieven</a></li>
         <li><a href="opleidingen.html">Opleidingen</a></li>
-        <li><a href="winkel.html">Shop</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <nav class="footer-col" aria-label="Aanbod">
-      <h3 class="footer-heading heading-sand">Aanbod</h3>
+      <h2 class="footer-heading heading-sand">Aanbod</h2>
       <ul>
         <li><a href="holistische-bodyscan.html">Holistische Bodyscan</a></li>
         <li><a href="mycotherapie.html">Mycotherapie</a></li>
         <li><a href="qm-hypnose.html">QM Hypnose</a></li>
-        <li><a href="arganolie.html">Arganolie</a></li>
-        <li><a href="cactusolie.html">Cactusolie</a></li>
-        <li><a href="nopal-cactuspoeder.html">Nopal cactuspoeder</a></li>
+        <li><a href="biofotonentherapie.html">Biofotonentherapie</a></li>
       </ul>
     </nav>
     <section class="footer-col" aria-labelledby="footer-contact">
-      <h3 class="footer-heading heading-cream" id="footer-contact">Contact</h3>
+      <h2 class="footer-heading heading-cream" id="footer-contact">Contact</h2>
       <address>
         <ul>
           <li><a href="mailto:info@reconnectandbalance.com">info@reconnectandbalance.com</a></li>
           <li><a href="tel:+31627977530">+31 6 27 97 75 30</a></li>
           <li><a href="https://wa.me/31627977530">WhatsApp</a></li>
-          <li>Richard Holstraat 63<br>2551 HN Den Haag</li>
         </ul>
       </address>
     </section>
     <nav class="footer-col" aria-label="Socials">
-      <h3 class="footer-heading">Socials</h3>
+      <h2 class="footer-heading">Socials</h2>
       <ul>
         <li><a href="https://www.facebook.com/reconnectandbalance/" target="_blank" rel="noopener">Facebook</a></li>
         <li><a href="http://linkedin.com/in/linda-vos-95005610b" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -166,7 +108,6 @@ ${file === 'index.html' ? '' : `<section class="usp">
     </nav>
     <p class="footer-bottom">
       <span>© ${new Date().getFullYear()} Reconnect &amp; Balance</span>
-      <span class="footer-legal"><a href="leveringsvoorwaarden.html">Leveringsvoorwaarden &amp; Privacy</a></span>
       <span>Made in NL by <a href="https://lychees.studio" target="_blank" rel="noopener">Lychees.studio</a></span>
     </p>
   </div>
@@ -198,7 +139,7 @@ async function downloadImages(html) {
     let src = fs.readFileSync(path.join(PAGES, file), 'utf8');
     const meta = src.match(/^<!--\s*title:\s*(.*?)\s*\|\s*(.*?)\s*-->/);
     if (!meta) throw new Error(`${file}: eerste regel moet <!-- title: ... | ... --> zijn`);
-    src = src.slice(meta[0].length).replace(/<!--\s*products:(\w+)\s*-->/g, (_, key) => productGrid(products[key]));
+    src = src.slice(meta[0].length);
     let html = template(file, meta[1], meta[2], src.trim());
     await downloadImages(html);
     html = html.replace(OLD_UPLOADS, url => `img/${path.basename(url)}`);
