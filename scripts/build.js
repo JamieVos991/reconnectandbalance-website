@@ -47,11 +47,11 @@ const template = (file, title, description, body) => `<!doctype html>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body${file === 'index.html' ? ' class="home"' : ''}>
 
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand"><img src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" alt="Reconnect &amp; Balance"></a>
+    <a href="index.html" class="brand"><img class="logo-light" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" alt="Reconnect &amp; Balance"><img class="logo-dark" src="img/Logo.png" alt=""></a>
     <nav class="menu" id="menu" aria-label="Hoofdmenu">
       ${renderNav(file)}
     </nav>

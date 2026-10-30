@@ -1,9 +1,18 @@
 // Menu (mobiel), dropdowns, scroll-animaties en het contactformulier
 const burger = document.querySelector('.burger');
 const menu = document.getElementById('menu');
+// Pas na het laden vloeiend scrollen, anders animeert het herstellen van de positie bij een refresh
+window.addEventListener('load', () => setTimeout(() => document.documentElement.classList.add('ready'), 100));
+
+const header = document.querySelector('.site-header');
+const setHeader = () => header.classList.toggle('scrolled', window.scrollY > 10 || menu.classList.contains('open'));
+window.addEventListener('scroll', setHeader, { passive: true });
+setHeader();
+
 burger.addEventListener('click', () => {
   const open = menu.classList.toggle('open');
   burger.setAttribute('aria-expanded', open);
+  setHeader();
 });
 
 document.querySelectorAll('.dropdown-toggle').forEach(btn => {
