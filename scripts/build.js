@@ -42,16 +42,15 @@ const template = (file, title, description, body) => `<!doctype html>
 <title>${title === 'Home' ? 'Reconnect & Balance' : `${title} · Reconnect & Balance`}</title>
 <meta name="description" content="${description}">${file === 'styleguide.html' ? '\n<meta name="robots" content="noindex">' : ''}
 <link rel="icon" href="img/Logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/lato-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body${file === 'index.html' ? ' class="home"' : ''}>
 
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand"><img class="logo-light" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" alt="Reconnect &amp; Balance"><img class="logo-dark" src="img/Logo.png" alt=""></a>
+    <a href="index.html" class="brand"><img class="logo-light" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" width="718" height="330" alt="Reconnect &amp; Balance">${file === 'index.html' ? '<img class="logo-dark" src="img/Logo.png" width="718" height="330" alt="">' : ''}</a>
     <nav class="menu" id="menu" aria-label="Hoofdmenu">
       ${renderNav(file)}
     </nav>
@@ -67,7 +66,7 @@ ${body}
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-about">
-      <img class="footer-brand" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" alt="Reconnect &amp; Balance">
+      <img class="footer-brand" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" width="718" height="330" loading="lazy" alt="Reconnect &amp; Balance">
       <p class="footer-tag">Verbinden met jezelf, je hart, je essentie.<br>Holistische praktijk in Den Haag.</p>
     </div>
     <nav class="footer-col" aria-label="Menu">
@@ -103,7 +102,7 @@ ${body}
       <h2 class="footer-heading">Socials</h2>
       <ul>
         <li><a href="https://www.facebook.com/reconnectandbalance/" target="_blank" rel="noopener">Facebook</a></li>
-        <li><a href="http://linkedin.com/in/linda-vos-95005610b" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://www.linkedin.com/in/linda-vos-95005610b" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
     </nav>
     <p class="footer-bottom">
@@ -134,6 +133,7 @@ async function downloadImages(html) {
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   for (const asset of ['style.css', 'main.js']) fs.copyFileSync(path.join(ROOT, 'src', asset), path.join(OUT, asset));
+  fs.cpSync(path.join(ROOT, 'src', 'fonts'), path.join(OUT, 'fonts'), { recursive: true });
 
   for (const file of fs.readdirSync(PAGES).filter(f => f.endsWith('.html'))) {
     let src = fs.readFileSync(path.join(PAGES, file), 'utf8');
