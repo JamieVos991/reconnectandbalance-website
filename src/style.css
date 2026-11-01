@@ -211,10 +211,19 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 
 /* ---------- Tarieven ---------- */
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.price-grid.fit{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));align-items:start}
 .price-card{background:var(--paper);border:1px solid var(--line);padding:30px 26px;display:flex;flex-direction:column}
 .price-card.featured{background:var(--espresso) var(--stripes);color:var(--cream);border-color:var(--espresso)}
 .price-card h3{font-size:1.45rem;text-transform:uppercase;letter-spacing:.04em}
 .price-card .dur{color:var(--gold-deep);font-size:.88rem}
+.price-card .amount{font-family:"Cormorant Garamond",serif;font-size:3rem;color:var(--gold-deep);line-height:1;margin:16px 0 0}
+.price-card.featured .amount{color:var(--gold)}
+.price-card .desc{color:var(--muted);font-size:.92rem;margin-top:14px;max-width:none}
+.price-card.featured .desc{color:rgba(244,237,226,.8)}
+.price-card .desc.foot{margin-top:18px}
+.price-card .rates li{display:flex;justify-content:space-between;gap:16px;padding-left:0}
+.price-card .rates li::before{display:none}
+.price-card .rates strong{color:var(--gold-deep);white-space:nowrap}
 .price-card.featured .dur{color:var(--gold)}
 .price-card.featured ul{color:rgba(244,237,226,.8)}
 .price-card ul{list-style:none;display:grid;gap:8px;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line);padding-top:18px;margin-top:20px}
@@ -233,9 +242,10 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .form{display:grid;gap:16px}
 .form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.form input,.form textarea{width:100%;font:inherit;padding:13px 16px;border-radius:var(--radius);border:1px solid var(--line);background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
-.form input:focus,.form textarea:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 3px rgba(201,164,92,.25)}
+.form input,.form select,.form textarea{width:100%;font:inherit;padding:13px 16px;border-radius:var(--radius);border:1px solid var(--line);background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 3px rgba(201,164,92,.25)}
 .form textarea{min-height:150px;resize:vertical}
+.form select{appearance:none;padding-right:42px;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%232a1d16' stroke-width='1.5'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center/12px 8px}
 .contact-list{list-style:none;display:grid;gap:22px}
 .contact-list li{display:flex;gap:16px;align-items:flex-start}
 .contact-list .ic{flex:none;width:46px;height:46px;display:grid;place-items:center;background:var(--espresso)}

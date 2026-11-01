@@ -39,8 +39,10 @@ document.querySelectorAll('form.mail-form').forEach(form => {
   form.addEventListener('submit', e => {
     e.preventDefault();
     const d = new FormData(form);
-    const body = `${d.get('bericht')}\n\n${d.get('naam')}\n${d.get('email')}\n${d.get('telefoon') || ''}`;
-    const subject = form.dataset.subject || 'Bericht via de website';
+    const keuze = d.get('behandeling');
+    const intro = keuze ? `Behandeling: ${keuze}\n\n` : '';
+    const body = `${intro}${d.get('bericht')}\n\n${d.get('naam')}\n${d.get('email')}\n${d.get('telefoon') || ''}`;
+    const subject = keuze ? `${keuze}: bericht via de website` : form.dataset.subject || 'Bericht via de website';
     location.href = `mailto:info@reconnectandbalance.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 });
