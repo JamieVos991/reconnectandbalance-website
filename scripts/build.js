@@ -13,13 +13,13 @@ const OLD_UPLOADS = /https:\/\/reconnectandbalance\.com\/wp-content\/uploads\/[^
 const nav = [
   { label: 'Behandelingen', children: [
     { href: 'holistische-bodyscan.html', label: 'Holistische Bodyscan' },
-    { href: 'mycotherapie.html', label: 'Mycotherapie' },
     { href: 'qm-hypnose.html', label: 'QM Hypnose' },
     { href: 'biofotonentherapie.html', label: 'Biofotonentherapie' },
   ] },
   { href: 'tarieven.html', label: 'Tarieven' },
   { href: 'linda-vos.html', label: 'Linda' },
   { href: 'opleidingen.html', label: 'Opleidingen' },
+  { href: 'interessante-links.html', label: 'Links' },
 ];
 
 function renderNav(current) {
@@ -76,6 +76,7 @@ ${body}
         <li><a href="linda-vos.html">Linda Vos</a></li>
         <li><a href="tarieven.html">Tarieven</a></li>
         <li><a href="opleidingen.html">Opleidingen</a></li>
+        <li><a href="interessante-links.html">Interessante links</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -83,7 +84,6 @@ ${body}
       <h2 class="footer-heading heading-sand">Aanbod</h2>
       <ul>
         <li><a href="holistische-bodyscan.html">Holistische Bodyscan</a></li>
-        <li><a href="mycotherapie.html">Mycotherapie</a></li>
         <li><a href="qm-hypnose.html">QM Hypnose</a></li>
         <li><a href="biofotonentherapie.html">Biofotonentherapie</a></li>
       </ul>
