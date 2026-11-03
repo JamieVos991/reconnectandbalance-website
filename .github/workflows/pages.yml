@@ -1,5 +1,7 @@
-# Zet de gebouwde website (map site/) online via GitHub Pages, op de hoofdmap van het domein.
-# Weer de onderhoudspagina tonen? Verander path hieronder in docs
+# Zet de website online via GitHub Pages.
+# Zolang ONDERHOUD aan staat, toont https://reconnectandbalance.com de onderhoudspagina (docs/)
+# en is de echte homepage te zien op /home.html. Alle andere pagina's werken gewoon.
+# Klaar om live te gaan? Zet ONDERHOUD hieronder op "nee".
 name: GitHub Pages
 
 on:
@@ -16,6 +18,9 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  ONDERHOUD: "ja"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,9 +29,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Site samenstellen
+        run: |
+          mkdir _site
+          cp -r site/. _site/
+          if [ "$ONDERHOUD" = "ja" ]; then
+            cp _site/index.html _site/home.html
+            # links naar de homepage wijzen naar de echte homepage
+            sed -i 's/href="index.html"/href="home.html"/g' _site/*.html
+            cp docs/index.html _site/index.html
+            cp docs/style.css _site/onderhoud.css
+            sed -i 's/href="style.css"/href="onderhoud.css"/' _site/index.html
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

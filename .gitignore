@@ -9,6 +9,9 @@ node_modules/
 _bron/
 content/
 
+# Map die de Pages-workflow samenstelt
+_site/
+
 # Offertes en facturen horen niet in de openbare repo
 offerte/
 factuur/
