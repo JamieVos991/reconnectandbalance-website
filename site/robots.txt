@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reconnectandbalance.com/sitemap.xml

@@ -9,6 +9,24 @@ const PAGES = path.join(ROOT, 'src', 'pages');
 const OUT = path.join(ROOT, 'site');
 const IMG_OUT = path.join(OUT, 'img');
 const OLD_UPLOADS = /https:\/\/reconnectandbalance\.com\/wp-content\/uploads\/[^"')\s]+/g;
+const SITE_URL = 'https://reconnectandbalance.com';
+const pageUrl = file => `${SITE_URL}/${file === 'index.html' ? '' : file}`;
+
+// Bedrijfsgegevens voor zoekmachines (alleen op de homepage)
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'HealthAndBeautyBusiness',
+  name: 'Reconnect & Balance',
+  description: 'Holistische praktijk in Den Haag: holistische bodyscan, biofotonentherapie en QM hypnose.',
+  url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/img/Logo.png`,
+  image: `${SITE_URL}/img/og-reconnect.jpg`,
+  email: 'info@reconnectandbalance.com',
+  telephone: '+31627977530',
+  address: { '@type': 'PostalAddress', addressLocality: 'Den Haag', addressCountry: 'NL' },
+  founder: { '@type': 'Person', name: 'Linda Vos' },
+  sameAs: ['https://www.facebook.com/reconnectandbalance/', 'https://www.linkedin.com/in/linda-vos-95005610b'],
+};
 
 const nav = [
   { label: 'Behandelingen', children: [
@@ -40,7 +58,21 @@ const template = (file, title, description, body) => `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title === 'Home' ? 'Reconnect & Balance' : `${title} · Reconnect & Balance`}</title>
-<meta name="description" content="${description}">${file === 'styleguide.html' ? '\n<meta name="robots" content="noindex">' : ''}
+<meta name="description" content="${description}">${file === '404.html' ? `
+<meta name="robots" content="noindex">
+<base href="/">` : `
+<link rel="canonical" href="${pageUrl(file)}">`}
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="Reconnect &amp; Balance">
+<meta property="og:title" content="${title === 'Home' ? 'Reconnect &amp; Balance' : `${title} · Reconnect &amp; Balance`}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${pageUrl(file)}">
+<meta property="og:image" content="${SITE_URL}/img/og-reconnect.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">${file === 'index.html' ? `
+<script type="application/ld+json">${JSON.stringify(business)}</script>` : ''}
 <link rel="icon" href="img/Logo.png">
 <link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/lato-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -135,7 +167,8 @@ async function downloadImages(html) {
   for (const asset of ['style.css', 'main.js']) fs.copyFileSync(path.join(ROOT, 'src', asset), path.join(OUT, asset));
   fs.cpSync(path.join(ROOT, 'src', 'fonts'), path.join(OUT, 'fonts'), { recursive: true });
 
-  for (const file of fs.readdirSync(PAGES).filter(f => f.endsWith('.html'))) {
+  const files = fs.readdirSync(PAGES).filter(f => f.endsWith('.html'));
+  for (const file of files) {
     let src = fs.readFileSync(path.join(PAGES, file), 'utf8');
     const meta = src.match(/^<!--\s*title:\s*(.*?)\s*\|\s*(.*?)\s*-->/);
     if (!meta) throw new Error(`${file}: eerste regel moet <!-- title: ... | ... --> zijn`);
@@ -146,4 +179,9 @@ async function downloadImages(html) {
     fs.writeFileSync(path.join(OUT, file), html);
     console.log('pagina:', file);
   }
+
+  const urls = files.filter(f => f !== '404.html').map(f => `  <url><loc>${pageUrl(f)}</loc></url>`);
+  fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`);
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+  console.log('sitemap.xml en robots.txt');
 })();

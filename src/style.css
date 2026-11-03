@@ -99,6 +99,7 @@ main p,main li,main blockquote,main summary,.footer-tag{max-width:46ch}
 .hero h1 em{color:var(--gold-deep)}
 .hero-side p{color:var(--muted);margin-bottom:18px}
 .hero-media{position:relative;flex:1;min-height:360px;border-radius:32px;overflow:hidden;background:#000}
+.hero-media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 /* Uitsparingen in de foto, in de achtergrondkleur van de sectie */
 .hero-media::before{content:"";position:absolute;top:0;left:50%;width:150px;height:38px;margin-left:-75px;background:var(--cream);border-radius:0 0 24px 24px;z-index:1}
 .notch{position:absolute;top:50%;width:26px;height:96px;margin-top:-48px;background:var(--cream)}
