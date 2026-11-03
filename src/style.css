@@ -251,7 +251,8 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .form label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .form input,.form select,.form textarea{width:100%;font:inherit;padding:13px 16px;border-radius:var(--radius);border:1px solid var(--line);background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
 .form-note{font-size:.85rem;color:var(--muted)}
-.form-honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+/* Verborgen veld voor bots; .form ervoor zodat de gewone invoerstijl het niet weer zichtbaar maakt */
+.form .form-honeypot{position:absolute;left:-9999px;width:1px;height:1px;padding:0;border:0;opacity:0;pointer-events:none}
 .form-status{display:block;font-size:.9rem;color:var(--rust);font-weight:700}
 .form-status a{text-decoration:underline;text-underline-offset:3px}
 .form-thanks{font-family:"Cormorant Garamond",serif;font-size:1.8rem;color:var(--ink);line-height:1.2}

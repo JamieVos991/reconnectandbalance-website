@@ -55,9 +55,22 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Het contactformulier verstuurt via de Worker (worker/), met Turnstile tegen spam
 const MAIL_FALLBACK = 'Versturen lukt nu niet. Mail ons gerust op <a href="mailto:info@reconnectandbalance.com">info@reconnectandbalance.com</a>.';
+// Concept blijft bewaard in de browser van de bezoeker, zodat een refresh niets wist
+const CONCEPT = 'contact-concept';
+const CONCEPT_VELDEN = ['naam', 'email', 'telefoon', 'behandeling', 'bericht'];
+const conceptLezen = () => { try { return JSON.parse(localStorage.getItem(CONCEPT)) || {}; } catch { return {}; } };
+const conceptOpslaan = form => {
+  try { localStorage.setItem(CONCEPT, JSON.stringify(Object.fromEntries(CONCEPT_VELDEN.map(n => [n, form.elements[n].value])))); } catch {}
+};
+const conceptWissen = () => { try { localStorage.removeItem(CONCEPT); } catch {} };
+
 document.querySelectorAll('form.contact-form').forEach(form => {
   const status = form.querySelector('.form-status');
   const btn = form.querySelector('button[type="submit"]');
+  const concept = conceptLezen();
+  CONCEPT_VELDEN.forEach(n => { if (typeof concept[n] === 'string') form.elements[n].value = concept[n]; });
+  form.addEventListener('input', () => conceptOpslaan(form));
+  form.addEventListener('change', () => conceptOpslaan(form));
   form.addEventListener('submit', async e => {
     e.preventDefault();
     if (form.querySelector('[name="_gotcha"]').value) return;
@@ -67,6 +80,7 @@ document.querySelectorAll('form.contact-form').forEach(form => {
     try {
       const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
       if (res.ok) {
+        conceptWissen();
         form.innerHTML = '<p class="form-thanks">Bedankt voor je bericht!</p><p>Ik neem zo snel mogelijk contact met je op.</p>';
         form.setAttribute('tabindex', '-1');
         form.focus();
