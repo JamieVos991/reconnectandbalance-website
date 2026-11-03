@@ -8,3 +8,7 @@ node_modules/
 # (bevat o.a. een Google Maps API-sleutel)
 _bron/
 content/
+
+# Offertes en facturen horen niet in de openbare repo
+offerte/
+factuur/
