@@ -386,13 +386,21 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .dark .bio-text p{color:rgba(244,237,226,.8)}
 .bio-head{margin-bottom:48px;align-items:end}
 .bio-head p{color:var(--muted)}
-.program-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.program{background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--gold-deep);padding:28px 26px}
+.program-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 48px}
+.program{position:relative;border-top:1px solid rgba(42,29,22,.22);padding:28px 0 36px 26px}
+.program::before{content:"";position:absolute;left:1px;top:38px;width:9px;height:9px;border:1px solid var(--gold-deep);transform:rotate(45deg)}
 .program h3{font-size:1.45rem;text-transform:uppercase;letter-spacing:.04em}
 .program .kicker{display:block;margin-top:2px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.1rem;color:var(--gold-deep)}
 .program p{margin-top:14px;color:var(--muted);font-size:.92rem}
 .bio-closing{margin-top:16px}
 .bio-closing em{color:var(--gold-deep)}
+/* Biofotonen: afsluiting */
+.bio-end{text-align:center}
+.bio-end .bio-title em{text-transform:none;letter-spacing:0;font-style:italic}
+.bio-end-lines{margin:28px auto 0;max-width:none;font-family:"Cormorant Garamond",serif;font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.4;color:var(--cream)}
+.bio-end-en{margin:18px auto 0;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.3rem;color:var(--gold)}
+.bio-end .actions{justify-content:center;margin-top:34px}
+.bio-end-note{margin:44px auto 0;max-width:60ch;padding-top:22px;border-top:1px solid var(--line-light);font-size:.82rem;color:rgba(244,237,226,.6)}
 /* Bodyscan: kerncijfers en aandachtspunten */
 .scan-stats{list-style:none;display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:24px}
 .scan-stats strong{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--gold)}
@@ -422,7 +430,7 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
   .bio-split,.bio-columns{grid-template-columns:1fr;gap:28px}
   .bio-columns{gap:56px}
   .bio-head{margin-bottom:32px}
-  .program-grid{grid-template-columns:1fr 1fr}
+  .program-grid{grid-template-columns:1fr 1fr;column-gap:32px}
   .gallery{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:640px){
