@@ -64,6 +64,19 @@ const conceptOpslaan = form => {
 };
 const conceptWissen = () => { try { localStorage.removeItem(CONCEPT); } catch {} };
 
+// Na verzenden: de hele kaart (titel en formulier) maakt plaats voor een duidelijke bevestiging
+function toonSucces(form, email) {
+  const kaart = form.closest('.form-card') || form;
+  kaart.classList.add('form-success');
+  kaart.innerHTML = `
+    <span class="success-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <h2 class="contact-title" tabindex="-1">Bericht verstuurd</h2>
+    <p>Bedankt! Je bericht is goed aangekomen. Linda neemt zo snel mogelijk contact met je op via <strong class="success-mail"></strong>.</p>
+    <div class="actions"><a href="index.html" class="btn btn-gold">Terug naar home</a></div>`;
+  kaart.querySelector('.success-mail').textContent = email;
+  kaart.querySelector('h2').focus();
+}
+
 document.querySelectorAll('form.contact-form').forEach(form => {
   const status = form.querySelector('.form-status');
   const btn = form.querySelector('button[type="submit"]');
@@ -81,9 +94,7 @@ document.querySelectorAll('form.contact-form').forEach(form => {
       const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
       if (res.ok) {
         conceptWissen();
-        form.innerHTML = '<p class="form-thanks">Bedankt voor je bericht!</p><p>Ik neem zo snel mogelijk contact met je op.</p>';
-        form.setAttribute('tabindex', '-1');
-        form.focus();
+        toonSucces(form, form.elements.email.value);
         return;
       }
       const data = await res.json().catch(() => null);

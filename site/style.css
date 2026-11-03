@@ -201,7 +201,6 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .callout .eyebrow{display:block;margin-bottom:10px}
 .callout p+p{margin-top:12px}
 .callout .actions{margin-top:22px}
-.form-card{padding:36px}
 .contact-title{font-size:2.2rem;margin-bottom:26px;text-transform:uppercase;letter-spacing:.03em;font-weight:400}
 .callout .big{font-family:"Cormorant Garamond",serif;font-size:2rem;color:var(--gold-deep);line-height:1.2}
 
@@ -255,18 +254,36 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .form .form-honeypot{position:absolute;left:-9999px;width:1px;height:1px;padding:0;border:0;opacity:0;pointer-events:none}
 .form-status{display:block;font-size:.9rem;color:var(--rust);font-weight:700}
 .form-status a{text-decoration:underline;text-underline-offset:3px}
-.form-thanks{font-family:"Cormorant Garamond",serif;font-size:1.8rem;color:var(--ink);line-height:1.2}
-.contact-form:focus{outline:none;box-shadow:none}
+.form-success{text-align:center;padding-block:56px}
+.form-success .success-icon{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 24px;border-radius:50%;background:var(--gold-deep);color:var(--paper)}
+.form-success svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.form-success .contact-title{margin-bottom:14px}
+.form-success .contact-title:focus{outline:none;box-shadow:none}
+.form-success p{max-width:38ch;margin-inline:auto;color:var(--muted)}
+.form-success strong{color:var(--ink);overflow-wrap:anywhere}
+.form-success .actions{justify-content:center;margin-top:28px}
 .form-note a{color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px}
 .form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 3px rgba(201,164,92,.25)}
 .form textarea{min-height:150px;resize:vertical}
 .form select{appearance:none;padding-right:42px;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%232a1d16' stroke-width='1.5'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center/12px 8px}
-.contact-list{list-style:none;display:grid;gap:22px}
-.contact-list li{display:flex;gap:16px;align-items:flex-start}
-.contact-list .ic{flex:none;width:46px;height:46px;display:grid;place-items:center;background:var(--espresso)}
-.contact-list svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.contact-list strong{display:block;color:var(--ink);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
-.contact-list a:hover{color:var(--gold-deep)}
+/* Contactpagina: links persoonlijk contact, rechts het formulier */
+.contact-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:start}
+.contact-info{background:var(--espresso) var(--stripes);color:var(--cream);padding:44px 40px;position:sticky;top:calc(var(--header) + 24px)}
+.contact-info .eyebrow{color:var(--gold)}
+.contact-info .contact-title{margin:12px 0 14px}
+.contact-info p{color:rgba(244,237,226,.8)}
+.contact-links{list-style:none;margin-top:30px;border-top:1px solid var(--line-light)}
+.contact-links li{border-bottom:1px solid var(--line-light)}
+.contact-links a{display:flex;align-items:center;gap:16px;padding:18px 0;transition:color .2s}
+.contact-links a:hover{color:var(--gold)}
+.contact-links .ic{flex:none;width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%}
+.contact-links svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.contact-links strong{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.contact-links a>span:last-child{min-width:0}
+.contact-info .contact-place{margin-top:26px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.3rem;color:var(--gold)}
+.form-card{background:var(--paper);border:1px solid var(--line);padding:44px}
+.form-card .contact-title{margin-bottom:8px}
+.form-intro{color:var(--muted);margin-bottom:28px}
 
 /* ---------- Voorwaarden ---------- */
 
@@ -314,7 +331,8 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
   .dropdown.open .dropdown-toggle svg{transform:rotate(180deg)}
   .dropdown-menu a{border-bottom:1px solid var(--line-light)}
   .menu .btn{margin:20px 0 0}
-  .statement-grid,.split,.split.wide-text{grid-template-columns:1fr;gap:40px}
+  .statement-grid,.split,.split.wide-text,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .contact-info{position:static}
   .split .media{order:-1}
   .arch{max-width:380px;margin:0 auto}
   .sticky{position:static}
@@ -334,6 +352,7 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
   .linda-grid{grid-template-columns:1fr;gap:34px}
   .linda-photo{max-width:340px;order:1}
   .price-grid,.form .row{grid-template-columns:1fr}
+  .contact-info,.form-card{padding:32px 22px}
   .hero{padding:calc(36px + var(--header)) 0 36px}
   .hero-inner{gap:28px;min-height:calc(100svh - var(--header) - 72px)}
   .hero-head{grid-template-columns:1fr;gap:18px}
@@ -374,13 +393,45 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .program p{margin-top:14px;color:var(--muted);font-size:.92rem}
 .bio-closing{margin-top:16px}
 .bio-closing em{color:var(--gold-deep)}
+/* Bodyscan: kerncijfers en aandachtspunten */
+.scan-stats{list-style:none;display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:24px}
+.scan-stats strong{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--gold)}
+.scan-stats span{display:block;margin-top:6px;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,226,.8)}
+.focus-card{background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--gold-deep);padding:36px 40px}
+.focus-label{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.5rem;color:var(--gold-deep);margin-bottom:10px}
+.focus-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:36px}
+.focus-list li{position:relative;padding:13px 0 13px 26px;border-bottom:1px solid var(--line);color:var(--ink)}
+.focus-list li.wide{grid-column:1/-1}
+.focus-list li::before{content:"";position:absolute;left:2px;top:1.45em;width:8px;height:8px;border:1px solid var(--gold-deep);transform:rotate(45deg)}
+/* QM Hypnose: citaat en het verloop van een sessie als tijdlijn */
+.bio-text .quote{margin-bottom:32px}
+.bio-text .hyp-lead{color:var(--ink)}
+.hyp-duration{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(2rem,4vw,3rem);line-height:1.1;color:var(--gold);margin:18px 0 16px}
+.timeline{list-style:none;border-left:1px solid var(--line-light);margin-left:5px}
+.timeline li{position:relative;padding:0 0 52px 40px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-6px;top:.55em;width:11px;height:11px;background:var(--espresso);border:1px solid var(--gold);transform:rotate(45deg)}
+.timeline h3{font-size:clamp(1.5rem,2.4vw,1.9rem);font-weight:400;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px}
+.timeline p{color:rgba(244,237,226,.8)}
+.timeline p+p{margin-top:14px}
+.timeline .hyp-question{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.35rem;line-height:1.35;color:var(--gold)}
+.timeline .hyp-note{margin-top:22px;padding:16px 20px;border:1px solid var(--line-light);color:var(--cream)}
+.timeline .hyp-note strong{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:1.5rem;color:var(--gold)}
+.timeline .actions{margin-top:26px}
 @media (max-width:940px){
   .bio-split,.bio-columns{grid-template-columns:1fr;gap:28px}
   .bio-columns{gap:56px}
   .bio-head{margin-bottom:32px}
   .program-grid{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:640px){
   .program-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .scan-stats{grid-template-columns:1fr 1fr;gap:24px 16px}
+  .focus-card{padding:26px 22px}
+  .focus-list{grid-template-columns:1fr}
+  .focus-list li{padding:10px 0 10px 24px}
+  .focus-list li::before{top:1.27em}
 }
 .bio-img{width:100%;margin-top:32px;border-radius:18px}
