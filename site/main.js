@@ -53,15 +53,33 @@ const io = new IntersectionObserver(entries => entries.forEach(e => {
 }), { threshold: .1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Het formulier opent het e-mailprogramma van de bezoeker met het bericht al ingevuld
-document.querySelectorAll('form.mail-form').forEach(form => {
-  form.addEventListener('submit', e => {
+// Het contactformulier verstuurt via de Worker (worker/), met Turnstile tegen spam
+const MAIL_FALLBACK = 'Versturen lukt nu niet. Mail ons gerust op <a href="mailto:info@reconnectandbalance.com">info@reconnectandbalance.com</a>.';
+document.querySelectorAll('form.contact-form').forEach(form => {
+  const status = form.querySelector('.form-status');
+  const btn = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const d = new FormData(form);
-    const keuze = d.get('behandeling');
-    const intro = keuze ? `Behandeling: ${keuze}\n\n` : '';
-    const body = `${intro}${d.get('bericht')}\n\n${d.get('naam')}\n${d.get('email')}\n${d.get('telefoon') || ''}`;
-    const subject = keuze ? `${keuze}: bericht via de website` : form.dataset.subject || 'Bericht via de website';
-    location.href = `mailto:info@reconnectandbalance.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (form.querySelector('[name="_gotcha"]').value) return;
+    btn.disabled = true;
+    btn.textContent = 'Versturen…';
+    status.textContent = '';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        form.innerHTML = '<p class="form-thanks">Bedankt voor je bericht!</p><p>Ik neem zo snel mogelijk contact met je op.</p>';
+        form.setAttribute('tabindex', '-1');
+        form.focus();
+        return;
+      }
+      const data = await res.json().catch(() => null);
+      if (data?.errors?.[0]?.message) status.textContent = data.errors[0].message;
+      else status.innerHTML = MAIL_FALLBACK;
+    } catch {
+      status.innerHTML = MAIL_FALLBACK;
+    }
+    window.turnstile?.reset(); // een token werkt maar één keer
+    btn.disabled = false;
+    btn.textContent = 'Versturen';
   });
 });

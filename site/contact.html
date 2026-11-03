@@ -63,7 +63,8 @@
     </div>
     <div class="callout form-card reveal">
       <h2 class="contact-title">Stuur mij een e-mail</h2>
-      <form class="form mail-form" data-subject="Bericht via de website">
+      <form class="form contact-form" action="https://reconnectandbalance-mail.artquake.workers.dev/contact" method="POST">
+        <input class="form-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row">
           <div><label for="c-naam">Naam</label><input id="c-naam" name="naam" autocomplete="name" required placeholder="Naam"></div>
           <div><label for="c-email">E-mailadres</label><input id="c-email" name="email" type="email" autocomplete="email" required placeholder="E-mailadres"></div>
@@ -82,8 +83,12 @@
           </select>
         </div>
         <div><label for="c-bericht">Bericht</label><textarea id="c-bericht" name="bericht" required placeholder="Bericht"></textarea></div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFyXZrCIJlYM7P9v" data-language="nl"></div>
+        <p class="form-note">Lees in de <a href="privacyverklaring.html">privacyverklaring</a> hoe we met je gegevens omgaan.</p>
         <div><button type="submit" class="btn btn-gold">Versturen</button></div>
+        <output class="form-status" aria-live="polite"></output>
       </form>
+      <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     </div>
   </div>
 </section>
@@ -132,7 +137,7 @@
       </ul>
     </nav>
     <p class="footer-bottom">
-      <span>© 2026 Reconnect &amp; Balance</span>
+      <span>© 2026 Reconnect &amp; Balance · <a href="privacyverklaring.html">Privacyverklaring</a></span>
       <span>Made in NL by <a href="https://lychees.studio" target="_blank" rel="noopener">Lychees.studio</a></span>
     </p>
   </div>

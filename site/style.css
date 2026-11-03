@@ -250,6 +250,13 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .form input,.form select,.form textarea{width:100%;font:inherit;padding:13px 16px;border-radius:var(--radius);border:1px solid var(--line);background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.form-note{font-size:.85rem;color:var(--muted)}
+.form-honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form-status{display:block;font-size:.9rem;color:var(--rust);font-weight:700}
+.form-status a{text-decoration:underline;text-underline-offset:3px}
+.form-thanks{font-family:"Cormorant Garamond",serif;font-size:1.8rem;color:var(--ink);line-height:1.2}
+.contact-form:focus{outline:none;box-shadow:none}
+.form-note a{color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px}
 .form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 3px rgba(201,164,92,.25)}
 .form textarea{min-height:150px;resize:vertical}
 .form select{appearance:none;padding-right:42px;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%232a1d16' stroke-width='1.5'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center/12px 8px}

@@ -1,0 +1,15 @@
+# Mail-API van reconnectandbalance.com: verstuurt het contactformulier.
+# Live zetten: zie worker/README.md.
+name = "reconnectandbalance-mail"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+AFZENDER = "website@reconnectandbalance.com" # eigen domein, geverifieerd in Resend
+ONTVANGER = "info@reconnectandbalance.com" # hier komen de berichten binnen
+
+# limiet tegen spam
+[[ratelimits]]
+name = "LIMIET_CONTACT"
+namespace_id = "2002"
+simple = { limit = 3, period = 60 }

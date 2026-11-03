@@ -139,7 +139,7 @@ ${body}
       </ul>
     </nav>
     <p class="footer-bottom">
-      <span>© ${new Date().getFullYear()} Reconnect &amp; Balance</span>
+      <span>© ${new Date().getFullYear()} Reconnect &amp; Balance · <a href="privacyverklaring.html">Privacyverklaring</a></span>
       <span>Made in NL by <a href="https://lychees.studio" target="_blank" rel="noopener">Lychees.studio</a></span>
     </p>
   </div>
