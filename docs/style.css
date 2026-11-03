@@ -1,0 +1,49 @@
+/* Tijdelijke onderhoudspagina, zelfde kleuren en letters als de nieuwe site */
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/cormorant-garamond.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300 700;font-display:swap;src:url(fonts/cormorant-garamond-italic.woff2) format("woff2")}
+@font-face{font-family:"Lato";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/lato-400.woff2) format("woff2")}
+@font-face{font-family:"Lato";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/lato-700.woff2) format("woff2")}
+:root{
+  --espresso:#2a1d16;
+  --rust:#5b3322;
+  --cream:#f4ede2;
+  --gold-deep:#765a1f;
+  --muted:#6b5a4c;
+  --line:rgba(42,29,22,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Lato,system-ui,sans-serif;color:var(--espresso);background:var(--cream);line-height:1.75;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px}
+
+.page{min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);padding:clamp(16px,3vw,32px)}
+.text{display:flex;flex-direction:column;justify-content:center;padding:clamp(16px,4vw,64px)}
+.logo{width:140px;margin-bottom:clamp(28px,5vh,56px)}
+.eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+.eyebrow::before{content:"[ "}.eyebrow::after{content:" ]"}
+h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(2rem,3.6vw,3.4rem);line-height:1.05;text-transform:uppercase;letter-spacing:.03em;margin:16px 0 18px;max-width:17ch}
+h1 em{text-transform:none;letter-spacing:0;color:var(--gold-deep)}
+.lead{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:clamp(1.3rem,2.2vw,1.6rem);color:var(--gold-deep);line-height:1.35;margin-bottom:16px}
+.text p{max-width:46ch}
+.contact{list-style:none;margin:22px 0 0;border-top:1px solid var(--line);max-width:46ch}
+.contact li{border-bottom:1px solid var(--line)}
+.contact a{display:block;padding:8px 0;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.35rem;transition:color .2s}
+.contact a:hover{color:var(--gold-deep)}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:1em 1.9em;border-radius:2px;border:1px solid var(--espresso);background:var(--espresso);color:var(--cream);font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;transition:background .2s,color .2s}
+.btn:hover{background:var(--rust);border-color:var(--rust)}
+.btn-ghost{background:none;color:var(--espresso)}
+.btn-ghost:hover{background:var(--espresso);border-color:var(--espresso);color:var(--cream)}
+.text .foot{margin-top:clamp(28px,5vh,56px);font-size:.8rem;color:var(--muted)}
+.foot a{border-bottom:1px solid currentColor}
+
+.media{position:relative;border-radius:24px;overflow:hidden;background:#000}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+
+@media (max-width:860px){
+  .page{grid-template-columns:1fr;gap:0;padding:16px}
+  .media{order:-1;height:42vh;min-height:240px}
+  .text{padding:32px 8px 16px}
+  .logo{width:120px;margin-bottom:32px}
+}
