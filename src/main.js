@@ -15,13 +15,32 @@ burger.addEventListener('click', () => {
   setHeader();
 });
 
+document.querySelectorAll('.dropdown').forEach(dd => {
+  // Na Escape blijft het menu dicht tot de muis of focus de dropdown verlaat
+  const reopen = () => dd.classList.remove('closed');
+  dd.addEventListener('mouseleave', reopen);
+  dd.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) reopen(); });
+});
 document.querySelectorAll('.dropdown-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
     const dd = btn.parentElement;
+    dd.classList.remove('closed');
     const open = dd.classList.toggle('open');
     btn.setAttribute('aria-expanded', open);
     document.querySelectorAll('.dropdown.open').forEach(o => { if (o !== dd) o.classList.remove('open'); });
   });
+});
+// Escape sluit open dropdowns en het mobiele menu
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('.dropdown.open,.dropdown:focus-within,.dropdown:hover').forEach(dd => {
+    dd.classList.remove('open');
+    dd.classList.add('closed');
+    const btn = dd.querySelector('.dropdown-toggle');
+    btn.setAttribute('aria-expanded', false);
+    if (dd.contains(document.activeElement)) btn.focus();
+  });
+  if (menu.classList.contains('open')) { burger.click(); burger.focus(); }
 });
 document.addEventListener('click', e => {
   if (!e.target.closest('.dropdown') && window.innerWidth > 940) {

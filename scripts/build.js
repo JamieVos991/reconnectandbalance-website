@@ -79,10 +79,11 @@ const template = (file, title, description, body) => `<!doctype html>
 <link rel="stylesheet" href="style.css">
 </head>
 <body${file === 'index.html' ? ' class="home"' : ''}>
+<a href="#inhoud" class="skip">Naar de inhoud</a>
 
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand"><img class="logo-light" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" width="718" height="330" alt="Reconnect &amp; Balance">${file === 'index.html' ? '<img class="logo-dark" src="img/Logo.png" width="718" height="330" alt="">' : ''}</a>
+    <a href="index.html" class="brand" aria-label="Reconnect &amp; Balance, naar de homepage"><img class="logo-light" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" width="718" height="330" alt="">${file === 'index.html' ? '<img class="logo-dark" src="img/Logo.png" width="718" height="330" alt="">' : ''}</a>
     <nav class="menu" id="menu" aria-label="Hoofdmenu">
       ${renderNav(file)}
     </nav>
@@ -91,7 +92,7 @@ const template = (file, title, description, body) => `<!doctype html>
   </div>
 </header>
 
-<main>
+<main id="inhoud" tabindex="-1">
 ${body}
 </main>
 

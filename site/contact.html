@@ -22,10 +22,11 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a href="#inhoud" class="skip">Naar de inhoud</a>
 
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand"><img class="logo-light" src="img/Logo_RB_wit_1.png" width="718" height="330" alt="Reconnect &amp; Balance"></a>
+    <a href="index.html" class="brand" aria-label="Reconnect &amp; Balance, naar de homepage"><img class="logo-light" src="img/Logo_RB_wit_1.png" width="718" height="330" alt=""></a>
     <nav class="menu" id="menu" aria-label="Hoofdmenu">
       <div class="dropdown">
         <button type="button" class="dropdown-toggle" aria-expanded="false">Behandelingen<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
@@ -42,7 +43,7 @@
   </div>
 </header>
 
-<main>
+<main id="inhoud" tabindex="-1">
 <section class="page-hero glow">
   <div class="wrap">
     <div class="eyebrow">Contact</div>
@@ -64,10 +65,10 @@
       <h2 class="contact-title">Stuur mij een e-mail</h2>
       <form class="form mail-form" data-subject="Bericht via de website">
         <div class="row">
-          <div><label for="c-naam">Naam</label><input id="c-naam" name="naam" required placeholder="Naam"></div>
-          <div><label for="c-email">E-mailadres</label><input id="c-email" name="email" type="email" required placeholder="E-mailadres"></div>
+          <div><label for="c-naam">Naam</label><input id="c-naam" name="naam" autocomplete="name" required placeholder="Naam"></div>
+          <div><label for="c-email">E-mailadres</label><input id="c-email" name="email" type="email" autocomplete="email" required placeholder="E-mailadres"></div>
         </div>
-        <div><label for="c-tel">Telefoonnummer</label><input id="c-tel" name="telefoon" type="tel" placeholder="Telefoonnummer"></div>
+        <div><label for="c-tel">Telefoonnummer</label><input id="c-tel" name="telefoon" type="tel" autocomplete="tel" placeholder="Telefoonnummer"></div>
         <div>
           <label for="c-behandeling">Behandeling</label>
           <select id="c-behandeling" name="behandeling" required>

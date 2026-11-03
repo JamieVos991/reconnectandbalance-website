@@ -10,9 +10,9 @@
   --cream:#f4ede2;
   --paper:#fbf7f0;
   --sand:#e8dac3;
-  --olive:#78632a;
+  --olive:#6e5a25;
   --gold:#c9a45c;        /* accent op donker */
-  --gold-deep:#8f6f2a;   /* accent op licht */
+  --gold-deep:#765a1f;   /* accent op licht, minstens 4.5:1 op zand */
   --ink:#2a1d16;
   --muted:#6b5a4c;
   --line:rgba(42,29,22,.16);
@@ -28,6 +28,11 @@ html.ready{scroll-behavior:smooth}
 body{font-family:Lato,system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.75;-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
+/* Focusrand die zowel op licht als op donker zichtbaar is */
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 2px var(--espresso)}
+.skip{position:fixed;left:1rem;top:-100px;z-index:200;background:var(--espresso);color:var(--cream);padding:.8em 1.2em;font-weight:700}
+.skip:focus{top:1rem}
+main:focus{outline:none;box-shadow:none}
 .wrap{width:min(1160px,100% - 32px);margin-inline:auto;padding-inline:1rem}
 .narrow{width:min(780px,100% - 32px);margin-inline:auto;padding-inline:1rem}
 h1,h2,h3,h4,h5{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.1;color:inherit}
@@ -77,6 +82,7 @@ main p,main li,main blockquote,main summary,.footer-tag{max-width:46ch}
 .dropdown-menu a{display:block!important;padding:11px 14px!important}
 .dropdown-menu a:hover,.dropdown-menu a.active{background:rgba(255,255,255,.05)}
 .dropdown:hover .dropdown-menu,.dropdown:focus-within .dropdown-menu,.dropdown.open .dropdown-menu{opacity:1;visibility:visible;transform:none}
+.dropdown.closed .dropdown-menu{opacity:0;visibility:hidden}
 .dropdown:hover .dropdown-toggle svg,.dropdown.open .dropdown-toggle svg{transform:rotate(180deg)}
 .burger{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px}
 .burger span{display:block;width:24px;height:1.5px;background:var(--cream);margin:6px auto;transition:.3s}
