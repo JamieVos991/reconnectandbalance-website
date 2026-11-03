@@ -1,5 +1,5 @@
-# Zet de map docs/ (nu de onderhoudspagina) online via GitHub Pages.
-# Later de nieuwe site live? Verander path hieronder in site
+# Zet de gebouwde website (map site/) online via GitHub Pages, op de hoofdmap van het domein.
+# Weer de onderhoudspagina tonen? Verander path hieronder in docs
 name: GitHub Pages
 
 on:
@@ -27,6 +27,6 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4
