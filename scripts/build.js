@@ -83,7 +83,7 @@ const template = (file, title, description, body) => `<!doctype html>
 
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand" aria-label="Reconnect &amp; Balance, naar de homepage"><img class="logo-light" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" width="718" height="330" alt="">${file === 'index.html' ? '<img class="logo-dark" src="img/Logo.png" width="718" height="330" alt="">' : ''}</a>
+    <a href="index.html" class="brand" aria-label="Reconnect &amp; Balance, naar de homepage"><img class="logo-light" src="img/Logo_RB_wit_1.png" width="718" height="330" alt="">${file === 'index.html' ? '<img class="logo-dark" src="img/Logo.png" width="718" height="330" alt="">' : ''}</a>
     <nav class="menu" id="menu" aria-label="Hoofdmenu">
       ${renderNav(file)}
     </nav>
@@ -99,7 +99,7 @@ ${body}
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-about">
-      <img class="footer-brand" src="https://reconnectandbalance.com/wp-content/uploads/2024/06/Logo_RB_wit_1.png" width="718" height="330" loading="lazy" alt="Reconnect &amp; Balance">
+      <img class="footer-brand" src="img/Logo_RB_wit_1.png" width="718" height="330" loading="lazy" alt="Reconnect &amp; Balance">
       <p class="footer-tag">Verbinden met jezelf, je hart, je essentie.<br>Holistische praktijk in Den Haag.</p>
     </div>
     <nav class="footer-col" aria-label="Menu">

@@ -323,7 +323,7 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
   .menu .menu-cta{display:inline-flex}
   .burger{display:block;margin-left:auto}
   .menu{position:fixed;top:var(--header);left:0;right:0;max-height:calc(100vh - var(--header));overflow-y:auto;flex-direction:column;align-items:stretch;gap:0;background:var(--espresso);border-bottom:1px solid var(--line-light);padding:8px 16px 24px;opacity:0;transform:translateY(-10px);visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s;font-size:.8rem}
-  .menu.open{opacity:1;transform:none;visibility:visible}
+  .menu.open{opacity:1;transform:none;visibility:visible;transition:opacity .25s,transform .25s}
   .menu>a:not(.btn),.dropdown-toggle{width:100%;padding:16px 0;border-bottom:1px solid var(--line-light);justify-content:space-between}
   .dropdown-menu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;background:none;padding:0 0 0 14px;display:none}
   .dropdown.open .dropdown-menu{display:block}

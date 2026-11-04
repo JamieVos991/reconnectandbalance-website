@@ -9,11 +9,25 @@ const setHeader = () => header.classList.toggle('scrolled', window.scrollY > 10 
 window.addEventListener('scroll', setHeader, { passive: true });
 setHeader();
 
+// Met het menu open blijft de focus in het menu; de pagina erachter is dan niet bereikbaar
+const achterMenu = document.querySelectorAll('.skip, main, footer');
+const menuItems = () => [...menu.querySelectorAll('a, button')].filter(el => el.offsetParent);
 burger.addEventListener('click', () => {
   const open = menu.classList.toggle('open');
   burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
+  achterMenu.forEach(el => { el.inert = open; });
+  if (open) menuItems()[0]?.focus();
   setHeader();
 });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Tab' || !menu.classList.contains('open')) return;
+  const items = menuItems();
+  if (!e.shiftKey && document.activeElement === burger) { e.preventDefault(); items[0]?.focus(); }
+  else if (e.shiftKey && document.activeElement === items[0]) { e.preventDefault(); burger.focus(); }
+});
+// Breder venster: geen mobiel menu meer, dus ook geen afgesloten pagina
+window.addEventListener('resize', () => { if (window.innerWidth > 940 && menu.classList.contains('open')) burger.click(); });
 
 document.querySelectorAll('.dropdown').forEach(dd => {
   // Na Escape blijft het menu dicht tot de muis of focus de dropdown verlaat
