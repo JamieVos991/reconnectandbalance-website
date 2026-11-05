@@ -1,22 +1,35 @@
-# Reconnect & Balance – nieuwe website
+# Reconnect & Balance: website
 
-De kant-en-klare website staat in `site/`. Je kunt die map zo op elke webhost zetten.
+Statische website voor de holistische praktijk van Linda Vos in Den Haag. Live op https://reconnectandbalance.com via GitHub Pages.
 
 ## Mappen
-- `src/pages/` – de inhoud van elke pagina (hier pas je teksten aan)
-- `src/style.css`, `src/main.js` – opmaak en menu/formulier
-- `scripts/build.js` – maakt `site/` opnieuw aan (en haalt afbeeldingen op)
-- `scripts/serve.js` – lokale server om de site te bekijken
-- `_bron/`, `content/` – kopie van de oude site, alleen ter referentie
+- `src/pages/`: de inhoud van elke pagina (hier pas je teksten aan). De eerste regel is `<!-- title: Titel | Omschrijving -->`.
+- `src/style.css`, `src/main.js`: opmaak, menu, dropdowns, scroll-animaties en het contactformulier
+- `src/fonts/`: de lettertypen
+- `scripts/build.js`: bouwt `site/` uit de pagina's en het sjabloon (header, menu, footer), plus `sitemap.xml` en `robots.txt`
+- `scripts/serve.js`: lokale server om de site te bekijken
+- `site/`: de gebouwde website, inclusief `site/img/` met alle afbeeldingen
+- `docs/`: de onderhoudspagina ("Binnenkort online")
+- `worker/`: Cloudflare Worker die het contactformulier verstuurt (zie `worker/README.md`)
+- `_bron/`, `content/`: kopie van de oude WordPress-site, alleen ter referentie (niet in git)
 
 ## Werken met de site
 ```bash
 node scripts/build.js
 node scripts/serve.js
 ```
-Open daarna http://localhost:8080
+Open daarna http://localhost:8080. Pas altijd `src/` aan en bouw opnieuw; wijzig `site/*.html` niet met de hand.
 
-## Goed om te weten
-- De productkaarten linken naar de bestaande webwinkel (WooCommerce) op reconnectandbalance.com. Daar gebeuren afrekenen en de winkelwagen.
-- Het contactformulier opent het e-mailprogramma van de bezoeker met het bericht al ingevuld.
-- Producten en prijzen staan bovenaan in `scripts/build.js`.
+## Online zetten
+Elke push naar `main` zet de site online via `.github/workflows/pages.yml`.
+
+- Zolang `ONDERHOUD: "ja"` in die workflow staat, toont het hoofddomein de onderhoudspagina uit `docs/`. De echte homepage staat dan op `/home.html` en alle andere pagina's werken gewoon.
+- Klaar om live te gaan? Zet `ONDERHOUD` op `"nee"` en push.
+
+## Contactformulier
+Het formulier post naar de Worker `reconnectandbalance-mail`. Die controleert Cloudflare Turnstile en een honeypot, beperkt het aantal berichten en verstuurt de mail via Resend naar info@reconnectandbalance.com, met het adres van de bezoeker als antwoordadres. Een concept van het bericht blijft bewaard in de browser (localStorage) tot het verstuurd is.
+
+## Mail en domein
+- Domein en DNS: Squarespace
+- Mailbox: Fastmail (info@ is een alias van Linda's account)
+- Verzenden vanaf de website: Resend (`website@reconnectandbalance.com`)

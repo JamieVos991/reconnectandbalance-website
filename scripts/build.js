@@ -127,7 +127,6 @@ ${body}
         <ul>
           <li><a href="mailto:info@reconnectandbalance.com">info@reconnectandbalance.com</a></li>
           <li><a href="tel:+31627977530">+31 6 27 97 75 30</a></li>
-          <li><a href="https://wa.me/31627977530">WhatsApp</a></li>
         </ul>
       </address>
     </section>
@@ -177,6 +176,8 @@ async function downloadImages(html) {
     let html = template(file, meta[1], meta[2], src.trim());
     await downloadImages(html);
     html = html.replace(OLD_UPLOADS, url => `img/${path.basename(url)}`);
+    // Screenreaders melden vooraf dat een link in een nieuw venster opent
+    html = html.replace(/(<a [^>]*target="_blank"[^>]*>[\s\S]*?)(<\/a>)/g, '$1<span class="sr-only"> (opent in nieuw venster)</span>$2');
     fs.writeFileSync(path.join(OUT, file), html);
     console.log('pagina:', file);
   }
