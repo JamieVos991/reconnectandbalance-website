@@ -411,6 +411,7 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:Lato,sans-serif;
 .focus-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:36px}
 .focus-list li{position:relative;padding:13px 0 13px 26px;border-bottom:1px solid var(--line);color:var(--ink)}
 .focus-list li.wide{grid-column:1/-1}
+.focus-list.single{grid-template-columns:1fr}
 .focus-list li::before{content:"";position:absolute;left:2px;top:1.45em;width:8px;height:8px;border:1px solid var(--gold-deep);transform:rotate(45deg)}
 /* QM Hypnose: citaat en het verloop van een sessie als tijdlijn */
 .bio-text .quote{margin-bottom:32px}
